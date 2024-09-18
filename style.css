@@ -1,0 +1,165 @@
+body{
+    background-color: #f0f4f8;
+}
+header {
+    background-color: #f0f4f8; /* Cor suave que combina com o texto e imagem */
+    padding: 20px; /* Espaçamento interno para dar mais respiro */
+    border-radius: 8px; /* Arredondamento nas bordas do header */
+}
+
+/* Estilizando a div da foto para centralizar a imagem */
+#daFoto {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* Centraliza verticalmente */
+    flex-direction: column;  /* Alinha verticalmente a imagem e outros elementos, se houver */
+}
+
+/* Estilizando a imagem */
+#foto1 {
+    width: 200px; /* Definindo um tamanho menor para a imagem */
+    height: auto; /* Mantém a proporção original da imagem */
+    border: 2px solid black; /* Adiciona uma borda fina preta */
+    border-radius: 8px; /* Adiciona um leve arredondamento na borda */
+    margin-bottom: 10px; /* Espaçamento inferior para afastar do texto */
+}
+
+/* Estilizando o h1 */
+.cabeçalho {
+    font-family: 'Montserrat', sans-serif; /* Fonte bonita */
+    font-size: 2em; /* Aumenta o tamanho da fonte */
+    text-align: center; /* Centraliza o texto */
+    font-weight: 600; /* Deixa a fonte mais marcante */
+    margin: 0;
+}
+
+/* Estilizando o container do cabeçalho para centralizar o texto */
+#doCabeçalho {
+    display: flex;
+    justify-content: center; /* Centraliza o texto horizontalmente */
+    align-items: center;     /* Centraliza o texto verticalmente */
+    flex-direction: column;  /* Mantém os elementos alinhados na vertical */
+    text-align: center; /* Garante que o texto fique centralizado */
+}
+
+li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Estilizando a caixa que envolve os links */
+.button-box {
+    background-color: #f0f4f8; /* Mesma cor do fundo do header */
+    border: 1px solid #333333; /* Borda fina em cinza escuro */
+    border-radius: 8px; /* Arredondando os cantos da borda */
+    padding: 15px; /* Espaçamento interno */
+    margin-bottom: 10px; /* Espaçamento entre as caixas */
+    text-align: center; /* Centraliza o texto dentro da caixa */
+    width: 300px; /* Largura fixa para a caixa */
+    margin-left: auto;
+    margin-right: auto; /* Centraliza a caixa na página */
+}
+
+/* Estilizando os links */
+.links {
+    font-family: 'Montserrat', sans-serif; /* Mesma fonte do h1 */
+    font-size: 1.2em; /* Tamanho da fonte */
+    text-decoration: none; /* Remove o sublinhado dos links */
+    color: #333333; /* Cor do texto */
+    color: inherit;
+}
+
+/* Efeito ao passar o mouse sobre o link */
+.links:hover {
+    color: #000000; /* Escurece a cor ao passar o mouse */
+    text-decoration: underline; /* Adiciona sublinhado ao hover */
+}
+
+/* Estilizando o footer */
+footer {
+    background-color: #f0f4f8; /* Mesma cor do header e body */
+    padding: 20px; /* Espaçamento interno para dar respiro */
+    border-top: 2px solid #333333; /* Borda superior para separar o footer do restante */
+    margin-top: 30px; /* Espaço entre o footer e o conteúdo acima */
+    text-align: center; /* Centraliza o conteúdo do footer */
+}
+
+/* Estilizando o h3 no footer */
+footer h3 {
+    font-family: 'Montserrat', sans-serif; /* Mesma fonte do header */
+    font-size: 1.8em; /* Tamanho do texto do h3 */
+    color: #333333; /* Cor do texto */
+    margin: 10px 0; /* Espaçamento ao redor do h3 */
+}
+
+/* Estilizando o parágrafo do footer */
+footer p {
+    font-family: 'Montserrat', sans-serif; /* Mesma fonte do header */
+    font-size: 1.1em; /* Tamanho da fonte */
+    color: #333333; /* Cor do texto */
+    margin: 0; /* Remove margens extras */
+}
+
+/* Estilizando o título */
+.titulo {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilizando os labels */
+.label-produto {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Estilizando os inputs */
+.input-produto {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Estilizando o botão */
+.btn-cadastrar {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-cadastrar:hover {
+    background-color: #45a049;
+}
+
+.titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Aplicar fonte Montserrat aos labels */
+.label-produto {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+}
+#mensagem{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+}
