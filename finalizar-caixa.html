@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="CodeVision">
+    <link rel="icon" href="imagens/foto1.jpg" type="image/png">
+    <title>Sistema ERP-Mercadinho RPK</title>
+    <link rel="shortcut icon" type="image/x-con" href="#">
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<header>
+ <div id="doCabeçalho">
+    <h1 class="cabeçalho">Mercadinho RPK</h1>
+</div>
+<div id="daFoto">
+    <img id="foto1" src="imagens/rpklogo.jpeg" />
+</div>
+
+</header>
+
+<body></body>
+    <header>
+        <h1>Relatório de Vendas do Dia</h1>
+    </header>
+
+    <main>
+        <div class="relatorio-vendas">
+            <h2>Quantidade de Vendas</h2>
+            <p>Total de Vendas: <span id="total-vendas">0</span></p>
+            <p>Vendas Fiado: <span id="vendas-fiado">0</span></p>
+            <p>Vendas em Dinheiro: <span id="vendas-dinheiro">0</span></p>
+            <p>Vendas em Cartão: <span id="vendas-cartao">0</span></p>
+            <p>Vendas em Pix: <span id="vendas-pix">0</span></p>
+            <p>Valor Total Recebido: R$ <span id="valor-recebido">0.00</span></p>
+        </div>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Função para obter e exibir o resumo das vendas
+            function atualizarResumoVendas() {
+                fetch('/vendas_dia')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('total-vendas').innerText = data.total_vendas;
+                        document.getElementById('vendas-fiado').innerText = data.vendas_fiado;
+                        document.getElementById('vendas-dinheiro').innerText = data.vendas_dinheiro;
+                        document.getElementById('vendas-cartao').innerText = data.vendas_cartao;
+                        document.getElementById('vendas-pix').innerText = data.vendas_pix;
+                        document.getElementById('valor-recebido').innerText = data.valor_total.toFixed(2);
+                    })
+                    .catch(error => console.error('Erro ao obter vendas:', error));
+            }
+    
+            // Função para adicionar uma venda
+            function adicionarVenda(metodoPagamento, valorTotal) {
+                $.ajax({
+                    url: 'http://localhost:5000/adicionar_venda',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        metodo_pagamento: metodoPagamento,
+                        valor_total: valorTotal
+                    }),
+                    success: function(response) {
+                        console.log(response.mensagem);
+                        atualizarResumoVendas();  // Atualiza o resumo após adicionar a venda
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Erro ao adicionar venda:', error);
+                    }
+                });
+            }
+    
+            // Chama a função ao carregar a página
+            atualizarResumoVendas();
+    
+            // Exemplo de chamada para adicionar uma venda
+            adicionarVenda('dinheiro', 150.00);  // Adiciona uma venda de R$ 150,00 em dinheiro
+        });
+    </script>
+    
+    
+</body>
