@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="CodeVision">
+    <link rel="icon" href="imagens/foto1.jpg" type="image/png">
+    <title>Sistema ERP-Mercadinho RPK</title>
+    <link rel="shortcut icon" type="image/x-con" href="#">
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <div id="doCabeçalho">
+            <h1 class="cabeçalho"><a class="links" href="template.html">Mercadinho RPK</a></h1>
+        </div>
+        <div id="daFoto">
+            <img id="foto1" src="imagens/rpklogo.jpeg" />
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="titulo">Venda de Produtos</h1>
+
+        <!-- Formulário principal de venda -->
+        <form id="venda-form">
+            <label for="nome_produto" class="label-atualizar">Nome do Produto:</label>
+            <input type="text" id="nome_produto" name="nome_produto" class="input-produto" placeholder="Nome do Produto" required>
+
+            <label for="quantidade" class="label-atualizar">Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade" class="input-produto" placeholder="EX:5" required>
+
+            <input type="submit" class="btn-atualizar" value="Adicionar ao Carrinho">
+        </form>
+
+        <!-- Botão de finalizar compra -->
+        <button id="btn-finalizar" class="btn-atualizar">Finalizar Compra</button>
+
+        <!-- Modal para resumo da compra e método de pagamento -->
+        <div id="modal-pagamento">
+            <div class="modal-conteudo">
+                <h2>Resumo da Compra</h2>
+                <div id="resumo-compra"></div>
+                <p><strong>Valor Total: <span id="valor-total">R$ 0,00</span></strong></p>
+                <h2>Escolha o Método de Pagamento</h2>
+                <select id="pagamento-modal" name="pagamento" class="input-produto" required>
+                    <option value="" disabled selected>Escolha o método de pagamento</option>
+                    <option value="cartao">Cartão</option>
+                    <option value="pix">Pix</option>
+                    <option value="dinheiro">Dinheiro</option>
+                    <option value="fiado">Fiado</option>
+                </select>
+                <button id="confirmar-pagamento" class="btn-atualizar">Confirmar Pagamento</button>
+                <button id="cancelar-pagamento" class="btn-atualizar" onclick="$('#modal-pagamento').hide();">Cancelar</button>
+            </div>
+        </div>
+
+        <!--Script para o carrinho-->      
+        <script>
+            $(document).ready(function() {
+                let carrinho = [];
+        
+                // Função para adicionar produto ao carrinho usando POST
+                $('#venda-form').on('submit', function(event) {
+                    event.preventDefault();
+        
+                    const nomeProduto = $('#nome_produto').val();
+                    const quantidade = parseInt($('#quantidade').val());
+        
+                    // Requisição AJAX usando POST para adicionar produto ao carrinho
+                    $.ajax({
+                        url: 'http://localhost:5000/adicionar_carrinho', // Porta 5000 para o Flask
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            nome_produto: nomeProduto,
+                            quantidade: quantidade
+                        }),
+                        success: function(response) {
+                            const produto = {
+                                nome_produto: response.nome_produto,  // Exibe o nome do produto
+                                quantidade: quantidade,
+                                preco_unitario: response.preco_unitario,  // Preço unitário correto
+                                preco_total: response.preco_unitario * quantidade  // Preço total do item
+                            };
+        
+                            carrinho.push(produto);
+                            toastr.success('Produto adicionado ao carrinho com sucesso!');
+                            $('#venda-form')[0].reset();
+                        },
+                        error: function(xhr, status, error) {
+                            toastr.error('Erro ao adicionar produto ao carrinho.');
+                        }
+                    });
+                });
+        
+                // Ao clicar no botão "Finalizar Compra", mostrar o modal com resumo
+                $('#btn-finalizar').on('click', function() {
+                    if (carrinho.length === 0) {
+                        toastr.error('Carrinho vazio!');
+                    } else {
+                        let valorTotal = 0;  
+                        let resumoHtml = '<ul>';
+        
+                        // Calcular valor total e montar resumo da compra
+                        carrinho.forEach(item => {
+                            const precoUnitario = item.preco_unitario || 0;  // Verifica se o preço é válido
+                            const quantidade = item.quantidade || 0;  // Verifica se a quantidade é válida
+        
+                            // Calcula o total por item
+                            const totalItem = precoUnitario * quantidade;
+        
+                            valorTotal += totalItem; // Soma o total ao valor total
+        
+                            // Adiciona o produto ao resumo
+                            resumoHtml += `<li>Produto: ${item.nome_produto}, Quantidade: ${quantidade}, Preço Unitário: R$ ${precoUnitario.toFixed(2)}, Total: R$ ${totalItem.toFixed(2)}</li>`;
+                        });
+                        
+                        resumoHtml += '</ul>';
+        
+                        // Atualiza o HTML do resumo
+                        $('#resumo-compra').html(resumoHtml);
+                        $('#valor-total').text(`R$ ${valorTotal.toFixed(2)}`);  // Exibir o valor total correto
+                        $('#modal-pagamento').show();  // Exibir modal de pagamento
+                    }
+                });
+        
+                // Ao confirmar o método de pagamento no modal
+                $('#confirmar-pagamento').on('click', function() {
+                    const metodoPagamento = $('#pagamento-modal').val();
+        
+                    if (!metodoPagamento) {
+                        toastr.error('Escolha um método de pagamento.');
+                        return;
+                    }
+        
+                    // Requisição AJAX para finalizar a compra
+                    $.ajax({
+                        url: 'http://localhost:5000/finalizar_compra', // Porta 5000 para o Flask
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            carrinho: carrinho,
+                            metodo_pagamento: metodoPagamento
+                        }),
+                        success: function(response) {
+                            toastr.success('Compra finalizada com sucesso!');
+                            carrinho = [];  // Esvaziar o carrinho após a compra
+                            $('#modal-pagamento').hide();  // Fechar o modal
+                        },
+                        error: function(xhr, status, error) {
+                            toastr.error('Erro ao finalizar a compra.');
+                        }
+                    });
+                });
+            });
+        </script>
+        
+        
+    </div>
+
+</body>
+
+</html>
