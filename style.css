@@ -163,3 +163,227 @@ footer p {
     font-weight: bold;
     color: #555;
 }
+
+.btn-atualizar{
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-atualizar:hover{
+    background-color: #45a049;
+}
+
+.label-atualizar{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+}
+
+.btn-finalizar{
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-finalizar:hover{
+    background-color: #45a049;
+}
+
+/* Estilo para os botões */
+.btn-atualizar, .btn-finalizar {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    margin: 10px 0; /* Adiciona espaçamento em cima e embaixo */
+}
+
+.btn-finalizar {
+    background-color: #007bff; /* Cor diferente para o botão de finalizar */
+}
+
+/* Estilo para distanciar os dois botões */
+form {
+    margin-bottom: 20px; /* Adiciona espaçamento entre os dois formulários */
+}
+
+.btn-atualizar:hover, .btn-finalizar:hover {
+    background-color: #218838; /* Efeito de hover */
+}
+
+.btn-finalizar:hover {
+    background-color: #0056b3;
+}
+
+body {
+    font-family: sans-serif; /* Mudança para sans-serif */
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.produto {
+    background: #e9ecef;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+    transition: transform 0.2s;
+}
+
+.produto:hover {
+    transform: scale(1.02);
+}
+
+.produto h2 {
+    margin: 0 0 10px;
+    color: #007bff;
+}
+
+.produto p {
+    margin: 5px 0;
+    color: #555;
+}
+
+body {
+    font-family: 'Sans Serif', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+main {
+    padding: 20px;
+}
+
+.relatorio-vendas {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: auto;
+    max-width: 600px;
+}
+
+/* Estilos do modal */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-pagar {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Estilos para a modal */
+#modal-pagamento {
+    display: none; /* Inicialmente escondido */
+    position: fixed; /* Fixa a modal na tela */
+    top: 0;
+    left: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    color: black; /* Cor do texto */
+    z-index: 1000; /* Certifique-se de que a modal fique acima de outros elementos */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modal-conteudo {
+    background-color: white; /* Fundo da modal branco */
+    margin: auto; /* Centraliza a modal */
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px; /* Largura da modal */
+    text-align: center; /* Centraliza o texto */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Adiciona sombra */
+}
+
+/* Espaçamento entre os produtos */
+.produto-item {
+    margin-bottom: 15px; /* Espaçamento entre os itens da lista */
+}
+
+/* Estilos para o botão de finalizar compra */
+.btn-finalizar {
+    margin: 20px 0; /* Espaçamento vertical */
+    padding: 10px; /* Espaçamento interno */
+    border: none; /* Remove borda padrão */
+    border-radius: 5px; /* Borda arredondada */
+    background-color: #007bff; /* Cor azul para o botão */
+    color: white; /* Cor do texto */
+    cursor: pointer; /* Cursor em forma de mão */
+}
+
+.btn-finalizar:hover {
+    background-color: #0056b3; /* Cor do botão ao passar o mouse */
+}
+
