@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="CodeVision">
+    <link rel="icon" href="imagens/foto1.jpg" type="image/png">
+    <title>Sistema ERP-Mercadinho RPK</title>
+    <link rel="shortcut icon" type="image/x-con" href="#">
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+</head>
+
+<header>
+    <div id="doCabeçalho">
+        <h1 class="cabeçalho"><a class="links" href="template.html">Mercadinho RPK</a></h1>
+    </div>
+    <div id="daFoto">
+        <img id="foto1" src="imagens/rpklogo.jpeg" />
+    </div>
+</header>
+
+<body></body>
+    <div class="container">
+        <h1>Estoque de Produtos</h1>
+        <div id="estoque-lista"></div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: 'http://127.0.0.1:5000/carregar_produtos',
+                type: 'GET',
+                success: function(produtos) {
+                    const estoqueLista = $('#estoque-lista');
+                    produtos.forEach(produto => {
+                        estoqueLista.append(`
+                            <div class="produto">
+                                <h2>${produto.nome}</h2>
+                                <p><strong>Código:</strong> ${produto.codigo}</p>
+                                <p><strong>Preço de Venda:</strong> R$ ${parseFloat(produto.preco).toFixed(2)}</p>
+                                <p><strong>Estoque:</strong> ${produto.estoque}</p>
+                            </div>
+                        `);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    alert('Erro ao carregar produtos. Tente novamente.');
+                }
+            });
+        });
+    </script>
+</body>
